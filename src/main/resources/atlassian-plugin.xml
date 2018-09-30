@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="jira-report-plugin"/>
+  <!-- add our web resources -->
+  <web-resource key="jira-report-plugin-resources" name="jira-report-plugin Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="jira-report-plugin.css" location="/css/jira-report-plugin.css"/>
+    <resource type="download" name="jira-report-plugin.js" location="/js/jira-report-plugin.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>jira-report-plugin</context>
+  </web-resource>
+  <report name="Report Extended" i18n-name-key="report-extended.name" key="report-extended" class="com.atlassian.plugins.tutorial.jira.reports.ReportExtended">
+    <description key="report-extended.description">The Report Extended Plugin</description>
+    <resource name="view" type="velocity" location="/templates/reports/report-extended/view.vm"/>
+    <resource name="i18n" type="i18n" location="ReportExtended"/>
+    <label key="report-extended.label"></label>
+    <properties>
+      <property>
+        <key>selectedDueDate</key>
+        <name>report.reportextended.selectedDueDate</name>
+        <description>report.reportextended.selectedDueDate.description</description>
+        <type>date</type>
+      </property>
+    </properties>
+  </report>
+</atlassian-plugin>

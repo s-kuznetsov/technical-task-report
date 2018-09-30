@@ -1,0 +1,28 @@
+#enable_html_escaping()
+<table width="100%" class="aui" id="single_groupby_report_table">
+    <tbody>
+        #set ($issues = $searchResults.getIssues())
+        #set ($graphModel = $statsGroup.getResolvedIssues($option.key))
+        #if ($issues.size() > 0)
+            #foreach ($issue in $issues)
+            <tr>
+                <td width="5%"> </td>
+                #issueLineItem ($issue)
+                <td nowrap class="assignee">
+                    #if($issue.getAssignee())
+                        $issue.getAssignee().getDisplayName()
+                    #else
+                        $i18n.getText('common.concepts.unassigned')
+                    #end</td>
+                <td nowrap class="last-updated"> $formatter.format($issue.getDueDate())</td>
+            </tr>
+            #end
+        #else
+        <tr>
+            <td colspan="6">
+                <span class="subText">$action.getText("common.concepts.noissues").</span>
+            </td>
+        </tr>
+        #end
+    </tbody>
+</table>
